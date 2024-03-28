@@ -89,6 +89,11 @@ export default class YouTubeHandler {
     return videos.map((e) => parseIso8601Duration(e.contentDetails.duration));
   }
 
+  /**
+   * Fetches the title of a Youtube playlist list.
+   * @param {string[]} ids - The list of video IDs.
+   * @returns {Promise<string[]>} A promise that resolves to a the playlist title.
+   */
   static async fetchPlaylistTitle(playlistURL: string): Promise<string> {
     const { apiKey } = process.env;
 
