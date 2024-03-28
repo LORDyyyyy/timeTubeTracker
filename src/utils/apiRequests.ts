@@ -88,4 +88,16 @@ export default class YouTubeHandler {
     }
     return videos.map((e) => parseIso8601Duration(e.contentDetails.duration));
   }
+
+  static async fetchPlaylistTitle(playlistURL: string): Promise<string> {
+    const { apiKey } = process.env;
+
+    const response = await youtube.playlists.list({
+      part: ['snippet'],
+      key: apiKey,
+      id: [playlistURL],
+    });
+
+    return response.data.items[0].snippet.title;
+  }
 }
