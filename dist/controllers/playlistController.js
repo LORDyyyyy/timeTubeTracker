@@ -101,9 +101,9 @@ class PlaylistController {
                     fullDurationInMs[`${speed}x`] += parseInt(ele, 10) / speed;
                 }
             });
-            await redisdb_1.default.set(`${playlistId}`, JSON.stringify(dataDuration), { EX: 3600 * 24 });
+            await redisdb_1.default.set(`${playlistId}`, JSON.stringify(dataDuration), { EX: 3600 * 24 * 2 });
             await redisdb_1.default.set(`${playlistId}_title`, playlistTitle, {
-                EX: 3600 * 24,
+                EX: 3600 * 24 * 2,
             });
             return {
                 totalPlaylistVideos: dataLength,
