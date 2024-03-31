@@ -8,11 +8,14 @@
  * @returns {string | null} The playlist ID if found, otherwise null.
  */
 function getPlaylistIdFromLink(url: string): string | null {
-  const playlistRegex = /(?:list=)([a-zA-Z0-9_-]+)/;
-  const match = url.match(playlistRegex);
+  const playlistRegex = /list=([\w-]+)|^([\w-]+)$/;
+  const match = playlistRegex.test(url);
 
-  if (match && match.length > 1) {
-    return match[1];
+  if (match) {
+    return (url as string)
+      .match(playlistRegex)[0]
+      .split('list=')
+      .filter((e: string) => e)[0];
   }
 
   return null;
