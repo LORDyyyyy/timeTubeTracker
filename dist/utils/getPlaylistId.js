@@ -10,10 +10,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @returns {string | null} The playlist ID if found, otherwise null.
  */
 function getPlaylistIdFromLink(url) {
-    const playlistRegex = /(?:list=)([a-zA-Z0-9_]+)/;
-    const match = url.match(playlistRegex);
-    if (match && match.length > 1) {
-        return match[1];
+    const playlistRegex = /list=([\w-]+)|^([\w-]+)$/;
+    const match = playlistRegex.test(url);
+    if (match) {
+        return url
+            .match(playlistRegex)[0]
+            .split('list=')
+            .filter((e) => e)[0];
     }
     return null;
 }

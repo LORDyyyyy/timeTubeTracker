@@ -128,11 +128,9 @@ class PlaylistController {
           }
         });
 
-        await redisClient.set(
-          `${playlistId}`,
-          JSON.stringify(dataDuration),
-          { EX: 3600 * 24 * 2 },
-        );
+        await redisClient.set(`${playlistId}`, JSON.stringify(dataDuration), {
+          EX: 3600 * 24 * 2,
+        });
         await redisClient.set(`${playlistId}_title`, playlistTitle, {
           EX: 3600 * 24 * 2,
         });
@@ -154,7 +152,7 @@ class PlaylistController {
           },
         };
       })
-      .catch(() => ({ error: 'Invalid Playlist URL/ID' }));
+      .catch(() => ({ error: `Invalid Playlist URL/ID.` }));
   }
 }
 
